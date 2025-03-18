@@ -1,10 +1,10 @@
 # p5.jsGlobalModeIssue
-In global mode, p5.js attaches functions like setup() and draw() to the window object, making it easy for beginners but it creates issue when multiple sketches are loaded on the same page.
+In global mode, p5.js attaches functions like setup() and draw() to the window object, making it easy for beginners but it creates issue when multiple sketches are loaded on the same page.  
 Here, sketch2.js overwrites sketch1.js. Only one sketch runs because they share the same global functions.
 
-For example:
+For example:  
 This is our index.html file
-
+```html
 <!DOCTYPE html>
 <html>
   <head>
@@ -24,9 +24,11 @@ This is our index.html file
 
   </body>
 </html>
-
 with sketch1.js as:
 
+javascript
+Copy
+Edit
 function setup() {
   let c = createCanvas(200, 200);
   c.parent('sketch1');
@@ -36,9 +38,11 @@ function setup() {
 function draw() {
   ellipse(mouseX, mouseY, 50, 50);
 }
-
 & sketch2.js as:
 
+javascript
+Copy
+Edit
 function setup() {
   let c = createCanvas(200, 200);
   c.parent('sketch2');
@@ -48,7 +52,5 @@ function setup() {
 function draw() {
   rect(mouseX, mouseY, 50, 50);
 }
-
 We observe that only the sketch2.js works, and the sketch1.js gets overridden as they are in global-mode,
-This is the main problem of global mode, that is the reason we use instance mode
-
+This is the main problem of global mode, that is the reason we use instance mode.
